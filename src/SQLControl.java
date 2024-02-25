@@ -6,28 +6,27 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class SQLControl {
-
-    public static void makePOSTRequest(String urlName)
+public class SQLControl
+{
+    public static void update(String urlName)
     {
-        BufferedReader rd = null;
-        StringBuilder sb = null;
-        String line = null;
         try{
             URL url = new URL(urlName);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            sb = new StringBuilder();
+            Object rd = conn.getInputStream();
         }
-        catch (MalformedURLException e){
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
-        catch (ProtocolException e){
+        catch (ProtocolException e)
+        {
             e.printStackTrace();
         }
-        catch (IOException e){
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
