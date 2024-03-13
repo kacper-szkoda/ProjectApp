@@ -58,9 +58,9 @@ public class PlantPanel extends JPanel implements ActionListener {
         //c.gridy = 1;
         //c.gridwidth = 2;
         //c.gridheight = 1;
-        pump_button = new JButton("Pump");
+        pump_button = new PumpButton("Pump");
         pump_button.addActionListener(this);
-        interrupt = new JButton("Interrupt");
+        interrupt = new PumpButton("Interrupt");
         interrupt.addActionListener(this);
         Indicator m = new Indicator();
         Indicator m2 = new Indicator();

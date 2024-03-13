@@ -14,6 +14,7 @@ public class MyFrame extends JFrame implements ActionListener
     private JTextField to_seek;
     private JButton update_button, back;
     private ArrayList<PlantButton> buttons;
+    private JLabel plant_name;
 
     enum frame_state {
         PLANT,
@@ -80,21 +81,6 @@ public class MyFrame extends JFrame implements ActionListener
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-
-//    public void update()
-//    {
-//        //Call control layer to update the data based on textfield
-//        String key = to_seek.getText();
-//        jPanel2.removeAll();
-//        data.clear();
-//        data = DB_ex.parseJSON(DB_ex.makeGETRequest("https://studev.groept.be/api/a23ib2a01/dbtask/" + key), key );
-//        for (JValueSet point : data)
-//        {
-//            jPanel2.add(point);
-//        }
-//    }
-
-
     public ArrayList<Plant> parseCurrentPlants()
     {
         return SQLControl.pJSONForCurrent(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/getCurrent"));
@@ -114,35 +100,50 @@ public class MyFrame extends JFrame implements ActionListener
         return buttons;
     }
 
+    public void makeOverviewTop ()
+    {
+        jPanel = new JPanel(new WrapLayout(FlowLayout.CENTER,400, 40));
+        jPanel.setBackground(new Color(156, 169, 143));
+        jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+        this.add(jPanel, BorderLayout.NORTH);
+        back = new JButton("back");
+        back.addActionListener(this);
+        jPanel.add(back);
+    }
+
+    public void makeOverviewBottom()
+    {
+        jPanel2 = new OverviewPanel(createButtons());
+        this.add(jPanel2, BorderLayout.CENTER);
+    }
+
+    public void makePlantPanel(PlantButton temp)
+    {
+        jPanel2 = new PlantPanel(temp.getPlant());
+        this.add(jPanel2, BorderLayout.CENTER);
+        plant_name = new JLabel(temp.getPlant().getPlant_name());
+        jPanel.add(plant_name);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
         //Call update and refresh frame
         if (buttons.contains(e.getSource()))
         {
-//          update();
             this.remove(jPanel2);
             this.remove(scrollPane);
-            jPanel2 = new PlantPanel(new Plant("lol", "a", "b"));
-            PlantButton temp = (PlantButton) e.getSource();
-            jPanel2 = new PlantPanel(temp.getPlant());
-            this.add(jPanel2, BorderLayout.CENTER);
-
-            //this.add(new PlantPanel(((PlantButton) e.getSource()).getPlant()));
+            makePlantPanel((PlantButton) e.getSource());
             this.getContentPane().revalidate();
-            //jPanel2.revalidate();
-            //scrollPane.revalidate();
         }
         if (e.getSource() == back)
         {
             this.remove(jPanel2);
             this.remove(scrollPane);
-            jPanel2 = new OverviewPanel(createButtons());
-            this.add(jPanel2, BorderLayout.CENTER);
-            //this.add(new PlantPanel(((PlantButton) e.getSource()).getPlant()));
+            this.remove(jPanel);
+            makeOverviewTop();
+            makeOverviewBottom();
             this.getContentPane().revalidate();
-            //jPanel2.revalidate();
-            //scrollPane.revalidate();
         }
     }
 }
