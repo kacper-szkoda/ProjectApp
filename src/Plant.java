@@ -26,6 +26,16 @@ public class Plant {
     public String getPlant_name() {
         return plant_name;
     }
+
+    public String getPref_light_plant()
+    {
+        return pref_light_plant;
+    }
+
+    public String getPref_moist_plant()
+    {
+        return pref_moist_plant;
+    }
 //    public void set_pref(String pref_moist, String pref_light)
 //    {
 //        for (Plant.pref_moist prefMoist : Plant.pref_moist.values()  )

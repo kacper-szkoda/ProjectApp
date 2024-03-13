@@ -29,8 +29,6 @@ public class PlantPanel extends JPanel implements ActionListener {
         {
             e.printStackTrace();
         }
-        pictureLabel.setBackground(Color.CYAN);
-        pictureLabel.setForeground(Color.RED);
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
@@ -92,7 +90,8 @@ public class PlantPanel extends JPanel implements ActionListener {
                 while (SQLControl.parseJSONForWeight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_weight")) >= needed_moist) {
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
+                    } catch (InterruptedException ex)
+                    {
                         throw new RuntimeException(ex);
                     }
                 }

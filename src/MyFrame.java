@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class MyFrame extends JFrame implements ActionListener
 {
@@ -15,6 +16,9 @@ public class MyFrame extends JFrame implements ActionListener
     private JButton update_button, back;
     private ArrayList<PlantButton> buttons;
     private JLabel plant_name;
+    Hashtable<String, Color> stringToCol;
+    private JLabel pref_moist;
+    private JLabel pref_light;
 
     enum frame_state {
         PLANT,
@@ -58,7 +62,7 @@ public class MyFrame extends JFrame implements ActionListener
 //        to_seek.setFont(new Font("Helvetica", Font.PLAIN, 30));
 //        to_seek.setHorizontalAlignment(JTextField.CENTER);
 
-        back = new JButton("back");
+        back = new PumpButton("Back");
         back.addActionListener(this);
         jPanel.add(back);
 
@@ -79,6 +83,16 @@ public class MyFrame extends JFrame implements ActionListener
         this.pack();
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        stringToCol = new Hashtable<String, Color>();
+        stringToCol.put("Direct Sun", new Color(254, 219, 127));
+        stringToCol.put("Dry", new Color(254, 219, 127));
+        stringToCol.put("Slightly Dry", new Color(230,255, 101 ));
+        stringToCol.put("High", new Color(230,255, 101));
+        stringToCol.put("Medium", new Color(137, 230, 210));
+        stringToCol.put("Slightly Moist", new Color(137, 230, 210));
+        stringToCol.put("Moist", new Color(210, 200, 228));
+        stringToCol.put("Low", new Color(210, 200, 228));
     }
 
     public ArrayList<Plant> parseCurrentPlants()
@@ -106,7 +120,7 @@ public class MyFrame extends JFrame implements ActionListener
         jPanel.setBackground(new Color(156, 169, 143));
         jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
-        back = new JButton("back");
+        back = new PumpButton("Back");
         back.addActionListener(this);
         jPanel.add(back);
     }
@@ -122,7 +136,16 @@ public class MyFrame extends JFrame implements ActionListener
         jPanel2 = new PlantPanel(temp.getPlant());
         this.add(jPanel2, BorderLayout.CENTER);
         plant_name = new JLabel(temp.getPlant().getPlant_name());
+        plant_name.setFont(new Font("Helvetica",Font.BOLD, 30));
+        pref_moist = new JLabel(temp.getPlant().getPref_moist_plant());
+        pref_moist.setFont(new Font("Helvetica",Font.BOLD, 30));
+        pref_moist.setForeground(stringToCol.get(temp.getPlant().getPref_moist_plant()));
+        pref_light = new JLabel(temp.getPlant().getPref_light_plant());
+        pref_light.setFont(new Font("Helvetica",Font.BOLD, 30));
+        pref_light.setForeground(stringToCol.get(temp.getPlant().getPref_light_plant()));
         jPanel.add(plant_name);
+        jPanel.add(pref_light);
+        jPanel.add(pref_moist);
     }
 
     @Override
