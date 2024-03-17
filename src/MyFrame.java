@@ -30,7 +30,7 @@ public class MyFrame extends JFrame implements ActionListener
     {
         //this.frame_state = last;
         curr_plants = parseCurrentPlants();
-        StateStorage ss = new StateStorage(curr_plants);
+        //StateStorage ss = new StateStorage(curr_plants);
         //Set up frame with 2 panels, one for control, one for display
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1080, 1080);
@@ -50,7 +50,7 @@ public class MyFrame extends JFrame implements ActionListener
         gbl = new GridBagLayout();
         jPanel = new JPanel(new BorderLayout());
         jPanel.setBackground(new Color(156, 169, 143));
-        jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+        jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80), new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
         jPanel2 = new OverviewPanel(createButtons());
         this.add (jPanel2, BorderLayout.CENTER);

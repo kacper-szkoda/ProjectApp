@@ -12,9 +12,12 @@ public class PlantPanel extends JPanel implements ActionListener {
     private JLabel pictureLabel;
     private ScaleLabel scale_moist, scale_light;
     private float needed_moist;
+    Plant examined_plant;
 
-    public PlantPanel(Plant plant) {
+    StateStorage ss;
+    public PlantPanel(Plant plant ) {
         this.setBackground(new Color(173, 188, 159));
+        examined_plant = plant;
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
         GridBagConstraints c = new GridBagConstraints();
@@ -44,12 +47,14 @@ public class PlantPanel extends JPanel implements ActionListener {
         c.gridwidth = 4;
         c.gridheight = 1;
         SliderGradient sgl = new SliderGradient();
+        sgl.setValue(getLight());
         sgl.setBackground(new Color(173, 188, 159));
         sgl.setEnabled(false);
         this.add(sgl, c);
         c.gridx = 2;
         c.gridy = 1;
         SliderGradient sgm = new SliderGradient();
+        sgm.setValue(getMoist());
         sgm.setEnabled(false);
         sgm.setBackground(new Color(173, 188, 159));
         this.add(sgm, c);
@@ -77,6 +82,17 @@ public class PlantPanel extends JPanel implements ActionListener {
                 SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + 1);
             }
         }
+
+        public int getMoist()
+        {
+            return SQLControl.parseJSONForMoist(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_moist_curr/" + examined_plant.getPlant_name()));
+        }
+
+        public int getLight()
+        {
+            return SQLControl.parseJSONForLight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_ldr_curr/" + examined_plant.getPlant_name()));
+        }
+
 
 //    public void addScale(ScaleLabel label){
 //        BufferedImage img = null;

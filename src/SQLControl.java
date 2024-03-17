@@ -81,15 +81,15 @@ public class SQLControl
         return plants;
     }
 
-    public static float parseJSONForMoist(String jsonString)
+    public static int parseJSONForMoist(String jsonString)
     {
-        float moist = 0.0f;
+        int moist = 0;
         System.out.println(jsonString);
         try {
             JSONArray array = new JSONArray(jsonString);
             for (int i = 0; i < array.length(); i++) {
                 JSONObject curObject = array.getJSONObject(i);
-                moist = curObject.getFloat("moisture_reading");
+                moist = curObject.getInt("moisture_reading");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -98,15 +98,15 @@ public class SQLControl
         return moist;
     }
 
-    public static float parseJSONForLight(String jsonString)
+    public static int parseJSONForLight(String jsonString)
     {
-        float ldr = 0.0f;
+        int ldr = 0;
         System.out.println(jsonString);
         try {
             JSONArray array = new JSONArray(jsonString);
             for (int i = 0; i < array.length(); i++) {
                 JSONObject curObject = array.getJSONObject(i);
-                ldr = curObject.getFloat("light_reading");
+                ldr = curObject.getInt("light_reading");
             }
         } catch (JSONException e) {
             e.printStackTrace();
