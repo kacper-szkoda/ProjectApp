@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class OutlinePanel extends JPanel {
+public class OutlinePanel extends JLabel {
     private String text;
     private Color textColor;
     private Color outlineColor;
@@ -10,6 +10,7 @@ public class OutlinePanel extends JPanel {
         this.text = text;
         this.textColor = textColor;
         this.outlineColor = outlineColor;
+        this.setPreferredSize(new Dimension(400, 40));
     }
 
     @Override

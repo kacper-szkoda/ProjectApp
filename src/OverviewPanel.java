@@ -14,7 +14,4 @@ public class OverviewPanel extends JPanel{
             this.add(button);
         }
     }
-
-
-
 }
