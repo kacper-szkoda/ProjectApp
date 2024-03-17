@@ -42,10 +42,16 @@ public class PlantPanel extends JPanel implements ActionListener {
         c.gridx = 2;
         c.gridwidth = 4;
         c.gridheight = 1;
-        this.add(new SliderGradient(), c);
+        SliderGradient sgl = new SliderGradient();
+        sgl.setBackground(new Color(173, 188, 159));
+        sgl.setEnabled(false);
+        this.add(sgl, c);
         c.gridx = 2;
         c.gridy = 1;
-        this.add(new SliderGradient(), c);
+        SliderGradient sgm = new SliderGradient();
+        sgm.setEnabled(false);
+        sgm.setBackground(new Color(173, 188, 159));
+        this.add(sgm, c);
         pump_button = new PumpButton("Pump");
         pump_button.addActionListener(this);
         interrupt = new PumpButton("Interrupt");

@@ -28,6 +28,7 @@ public class MyFrame extends JFrame implements ActionListener
     {
         //this.frame_state = last;
         curr_plants = parseCurrentPlants();
+        StateStorage ss = new StateStorage(curr_plants);
         //Set up frame with 2 panels, one for control, one for display
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1080, 1080);
@@ -85,14 +86,14 @@ public class MyFrame extends JFrame implements ActionListener
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         stringToCol = new Hashtable<String, Color>();
-        stringToCol.put("Direct Sun", new Color(254, 219, 127));
-        stringToCol.put("Dry", new Color(254, 219, 127));
-        stringToCol.put("Slightly Dry", new Color(230,255, 101 ));
-        stringToCol.put("High", new Color(230,255, 101));
-        stringToCol.put("Medium", new Color(137, 230, 210));
-        stringToCol.put("Slightly Moist", new Color(137, 230, 210));
-        stringToCol.put("Moist", new Color(210, 200, 228));
-        stringToCol.put("Low", new Color(210, 200, 228));
+        stringToCol.put("Direct Sun", Color.decode("#A0AF17"));
+        stringToCol.put("Dry", Color.decode("#A0AF17"));
+        stringToCol.put("Slightly Dry", Color.decode("#68B058"));
+        stringToCol.put("High", Color.decode("#68B058"));
+        stringToCol.put("Medium", Color.decode("#32B197"));
+        stringToCol.put("Slightly Moist", Color.decode("#32B197"));
+        stringToCol.put("Moist", Color.decode("#01B2D1"));
+        stringToCol.put("Low", Color.decode("#01B2D1"));
     }
 
     public ArrayList<Plant> parseCurrentPlants()

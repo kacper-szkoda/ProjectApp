@@ -11,6 +11,4 @@ public class PlantButton extends JButton{
         this.plant = plant;
         this.setText(plant.getPlant_name());
     }
-
-
 }
