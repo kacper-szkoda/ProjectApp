@@ -33,11 +33,12 @@ public class PlantPanel extends JPanel implements ActionListener {
         c.gridy = 0;
         c.gridwidth = 2;
         c.gridheight = 3;
-        c.insets = new Insets(10, 10, 10, 10);
+        c.insets = new Insets(10, 80, 10, 10);
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.weighty = 1;
         this.add(pictureLabel, c);
+        c.insets = new Insets(10, 10, 10, 40);
         c.gridy = 0;
         c.gridx = 2;
         c.gridwidth = 4;
@@ -59,8 +60,10 @@ public class PlantPanel extends JPanel implements ActionListener {
         c.gridy = 2;
         c.gridx = 2;
         c.gridwidth = 1;
+        c.insets = new Insets(10, 10, 40, 40);
         this.add(pump_button, c);
         c.gridx = 4;
+        c.insets = new Insets(10, 40, 40, 40);
         this.add(interrupt, c);
     }
 
@@ -68,22 +71,10 @@ public class PlantPanel extends JPanel implements ActionListener {
         @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == pump_button) {
-                System.out.println("started");
                 SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 1);
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 2);
-                while (SQLControl.parseJSONForWeight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_weight")) >= needed_moist) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex)
-                    {
-                        throw new RuntimeException(ex);
-                    }
-                }
-                System.out.println("done");
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" +1);
             }
             if (e.getSource() == interrupt) {
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/pump_interrupt");
+                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + 1);
             }
         }
 

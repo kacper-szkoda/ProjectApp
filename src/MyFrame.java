@@ -17,7 +17,7 @@ public class MyFrame extends JFrame implements ActionListener
     private JTextField to_seek;
     private JButton update_button, back;
     private ArrayList<PlantButton> buttons;
-    private OutlinePanel plant_name;
+    private JLabel plant_name;
     Hashtable<String, Color> stringToCol;
     private OutlinePanel pref_moist;
     private OutlinePanel pref_light;
@@ -48,7 +48,7 @@ public class MyFrame extends JFrame implements ActionListener
         c.weighty = 1;
         c.weightx = 1;
         gbl = new GridBagLayout();
-        jPanel = new JPanel(gbl);
+        jPanel = new JPanel(new BorderLayout());
         jPanel.setBackground(new Color(156, 169, 143));
         jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
@@ -72,9 +72,14 @@ public class MyFrame extends JFrame implements ActionListener
 //        to_seek.setFont(new Font("Helvetica", Font.PLAIN, 30));
 //        to_seek.setHorizontalAlignment(JTextField.CENTER);
 
-        back = new PumpButton("Back");
+        back = new JButton("Back");
+        back.setFont(new Font("Helvetica",Font.BOLD, 40));
+        back.setForeground(new Color(255, 255, 255));
+        back.setBackground(Color.decode("#829F77"));
+        back.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+        back.setPreferredSize(new Dimension(200, 75));
         back.addActionListener(this);
-        jPanel.add(back,c);
+        jPanel.add(back, BorderLayout.WEST);
 
 
         //Make the panel scrollable, so that the app does not break with
@@ -97,10 +102,10 @@ public class MyFrame extends JFrame implements ActionListener
         stringToCol = new Hashtable<String, Color>();
         stringToCol.put("Direct Sun", Color.decode("#A0AF17"));
         stringToCol.put("Dry", Color.decode("#A0AF17"));
-        stringToCol.put("Slightly Dry", Color.decode("#68B058"));
-        stringToCol.put("High", Color.decode("#68B058"));
-        stringToCol.put("Medium", Color.decode("#32B197"));
-        stringToCol.put("Slightly Moist", Color.decode("#32B197"));
+        stringToCol.put("Slightly Dry", Color.decode("#66B05B"));
+        stringToCol.put("High", Color.decode("#66B05B"));
+        stringToCol.put("Medium", Color.decode("#2DB19D"));
+        stringToCol.put("Slightly Moist", Color.decode("#2DB19D"));
         stringToCol.put("Moist", Color.decode("#01B2D1"));
         stringToCol.put("Low", Color.decode("#01B2D1"));
     }
@@ -126,15 +131,20 @@ public class MyFrame extends JFrame implements ActionListener
 
     public void makeOverviewTop ()
     {
-        jPanel = new JPanel(gbl);
+        jPanel = new JPanel(new BorderLayout());
         c.gridy = 0;
         c.gridx = 0;
         jPanel.setBackground(new Color(156, 169, 143));
         jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
-        back = new PumpButton("Back");
+        back = new JButton("Back");
+        back.setFont(new Font("Helvetica",Font.BOLD, 40));
+        back.setForeground(new Color(255, 255, 255));
+        back.setBackground(Color.decode("#829F77"));
+        back.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+        back.setPreferredSize(new Dimension(200, 75));
         back.addActionListener(this);
-        jPanel.add(back, c);
+        jPanel.add(back, BorderLayout.WEST);
     }
 
     public void makeOverviewBottom()
@@ -147,17 +157,20 @@ public class MyFrame extends JFrame implements ActionListener
     {
         jPanel2 = new PlantPanel(temp.getPlant());
         this.add(jPanel2, BorderLayout.CENTER);
-        plant_name = new OutlinePanel(temp.getPlant().getPlant_name(), Color.black, Color.white);
-        plant_name.setFont(new Font("Helvetica",Font.BOLD, 30));
-        plant_name.setBackground(new Color(156, 169, 143));
-        pref_moist = new OutlinePanel(temp.getPlant().getPref_moist_plant(), stringToCol.get(temp.getPlant().getPref_light_plant()), Color.white );
-        pref_moist.setBackground(new Color(156, 169, 143));
+        plant_name = new JLabel(temp.getPlant().getPlant_name());
+        plant_name.setForeground(Color.white);
+        plant_name.setHorizontalAlignment(JLabel.CENTER);
+        plant_name.setFont(new Font("Helvetica",Font.BOLD, 50));
+        plant_name.setBackground(Color.decode("#829F77"));
+        pref_moist = new OutlinePanel(temp.getPlant().getPref_moist_plant(), stringToCol.get(temp.getPlant().getPref_moist_plant()), Color.white );
+        pref_moist.setBackground(Color.decode("#829F77"));
         //pref_moist.setFont(new Font("Helvetica",Font.BOLD, 30));
         //.setForeground(stringToCol.get(temp.getPlant().getPref_moist_plant()));
         pref_light = new OutlinePanel(temp.getPlant().getPref_light_plant(), stringToCol.get(temp.getPlant().getPref_light_plant()), Color.white );
-        pref_light.setBackground(new Color(156, 169, 143));
+        pref_light.setBackground(Color.decode("#829F77"));
         //pref_light.setFont(new Font("Helvetica",Font.BOLD, 30));
         //pref_light.setForeground(stringToCol.get(temp.getPlant().getPref_light_plant()));
+        jPanel.setLayout(gbl);
         c.gridy = 0;
         c.gridx = 1;
         c.gridwidth = 2;
