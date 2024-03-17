@@ -15,10 +15,10 @@ public class MyFrame extends JFrame implements ActionListener
     private JTextField to_seek;
     private JButton update_button, back;
     private ArrayList<PlantButton> buttons;
-    private JLabel plant_name;
+    private OutlinePanel plant_name;
     Hashtable<String, Color> stringToCol;
-    private JLabel pref_moist;
-    private JLabel pref_light;
+    private OutlinePanel pref_moist;
+    private OutlinePanel pref_light;
 
     enum frame_state {
         PLANT,
@@ -39,7 +39,7 @@ public class MyFrame extends JFrame implements ActionListener
         this.getContentPane().setBackground(new Color(173, 188, 159));
         //Note, WrapLayout is a piece of open-source code. FlowLayout would try to put all components
         //in one row, which is not suited for a scrollable panel, WrapLayout specifically addresses that issue
-        jPanel = new JPanel(new WrapLayout(FlowLayout.CENTER,400, 40));
+        jPanel = new JPanel(new WrapLayout(FlowLayout.CENTER,20, 10));
         jPanel.setBackground(new Color(156, 169, 143));
         jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
@@ -117,7 +117,7 @@ public class MyFrame extends JFrame implements ActionListener
 
     public void makeOverviewTop ()
     {
-        jPanel = new JPanel(new WrapLayout(FlowLayout.CENTER,400, 40));
+        jPanel = new JPanel(new WrapLayout(FlowLayout.CENTER,20, 10));
         jPanel.setBackground(new Color(156, 169, 143));
         jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(jPanel, BorderLayout.NORTH);
@@ -136,14 +136,17 @@ public class MyFrame extends JFrame implements ActionListener
     {
         jPanel2 = new PlantPanel(temp.getPlant());
         this.add(jPanel2, BorderLayout.CENTER);
-        plant_name = new JLabel(temp.getPlant().getPlant_name());
+        plant_name = new OutlinePanel(temp.getPlant().getPlant_name(), Color.black, Color.white);
         plant_name.setFont(new Font("Helvetica",Font.BOLD, 30));
-        pref_moist = new JLabel(temp.getPlant().getPref_moist_plant());
-        pref_moist.setFont(new Font("Helvetica",Font.BOLD, 30));
-        pref_moist.setForeground(stringToCol.get(temp.getPlant().getPref_moist_plant()));
-        pref_light = new JLabel(temp.getPlant().getPref_light_plant());
-        pref_light.setFont(new Font("Helvetica",Font.BOLD, 30));
-        pref_light.setForeground(stringToCol.get(temp.getPlant().getPref_light_plant()));
+        plant_name.setBackground(new Color(156, 169, 143));
+        pref_moist = new OutlinePanel(temp.getPlant().getPref_moist_plant(),stringToCol.get(temp.getPlant().getPref_light_plant()), Color.white );
+        pref_moist.setBackground(new Color(156, 169, 143));
+        //pref_moist.setFont(new Font("Helvetica",Font.BOLD, 30));
+        //.setForeground(stringToCol.get(temp.getPlant().getPref_moist_plant()));
+        pref_light = new OutlinePanel(temp.getPlant().getPref_light_plant(),stringToCol.get(temp.getPlant().getPref_light_plant()), Color.white );
+        pref_light.setBackground(new Color(156, 169, 143));
+        //pref_light.setFont(new Font("Helvetica",Font.BOLD, 30));
+        //pref_light.setForeground(stringToCol.get(temp.getPlant().getPref_light_plant()));
         jPanel.add(plant_name);
         jPanel.add(pref_light);
         jPanel.add(pref_moist);
