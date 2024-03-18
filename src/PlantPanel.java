@@ -3,11 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class PlantPanel extends JPanel implements ActionListener {
+public class PlantPanel extends JPanel implements ActionListener, MouseListener {
     private JButton interrupt, pump_button;
     private JLabel pictureLabel;
     private ScaleLabel scale_moist, scale_light;
@@ -22,6 +24,7 @@ public class PlantPanel extends JPanel implements ActionListener {
         this.setLayout(gbl);
         GridBagConstraints c = new GridBagConstraints();
         pictureLabel = new JLabel();
+        pictureLabel.addMouseListener(this);
         this.setPreferredSize(new Dimension(377,550));
         try {
             File img = new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\71NAGPZug1L.jpg");
@@ -92,6 +95,59 @@ public class PlantPanel extends JPanel implements ActionListener {
         {
             return SQLControl.parseJSONForLight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_ldr_curr/" + examined_plant.getPlant_name()));
         }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e))
+        {
+            System.out.println("left");
+        }
+        if (SwingUtilities.isRightMouseButton(e))
+        {
+            JFileChooser fileChooser = new JFileChooser();
+            int response = fileChooser.showOpenDialog(null);
+            System.out.println("right");
+
+            if (response == JFileChooser.APPROVE_OPTION)
+            {
+                File file = new File(String.valueOf(fileChooser.getSelectedFile().getAbsolutePath()));
+                updateImage(file);
+            }
+        }
+
+    }
+
+    public void updateImage(File img)
+    {
+        try {
+            BufferedImage image = ImageIO.read(img);
+            Image scaled = image.getScaledInstance(377, 550, Image.SCALE_SMOOTH);
+            pictureLabel.setIcon(new ImageIcon(scaled));
+        }   catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 
 
 //    public void addScale(ScaleLabel label){
