@@ -8,8 +8,10 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.TimerTask;
 
 public class PlantPanel extends JPanel implements ActionListener, MouseListener {
+    private SliderGradient sgl, sgm;
     private JButton interrupt, pump_button;
     private JLabel pictureLabel;
     private ScaleLabel scale_moist, scale_light;
@@ -42,14 +44,14 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
         c.gridx = 2;
         c.gridwidth = 4;
         c.gridheight = 1;
-        SliderGradient sgl = new SliderGradient();
+        sgl = new SliderGradient();
         sgl.setValue(getLight());
         sgl.setBackground(new Color(173, 188, 159));
         sgl.setEnabled(false);
         this.add(sgl, c);
         c.gridx = 2;
         c.gridy = 1;
-        SliderGradient sgm = new SliderGradient();
+        sgm = new SliderGradient();
         sgm.setValue(getMoist());
         sgm.setEnabled(false);
         sgm.setBackground(new Color(173, 188, 159));
@@ -66,10 +68,34 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
         c.gridx = 4;
         c.insets = new Insets(10, 40, 40, 40);
         this.add(interrupt, c);
+
+        java.util.Timer timer = new java.util.Timer();
+        TimerTask task =new TimerTask() {
+            @Override
+            public void run() {
+                fetchDataAndUpdateUI();
+            }
+        };
+
+        timer.scheduleAtFixedRate( task, 0, 2000);
+    }
+
+    private void fetchDataAndUpdateUI() {
+        System.out.println("Executed");
+        SwingUtilities.invokeLater(() -> {
+            try {
+                System.out.println(getLight());
+                System.out.println(getMoist());
+                sgl.setValue(getLight());
+                sgm.setValue(getMoist());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }); 
     }
 
 
-        @Override
+    @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == pump_button) {
                 SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 1);
