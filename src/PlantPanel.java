@@ -15,6 +15,7 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
     private ScaleLabel scale_moist, scale_light;
     private float needed_moist;
     Plant examined_plant;
+    //private File plant_img = new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\71NAGPZug1L.jpg");
 
     StateStorage ss;
     public PlantPanel(Plant plant ) {
@@ -26,15 +27,7 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
         pictureLabel = new JLabel();
         pictureLabel.addMouseListener(this);
         this.setPreferredSize(new Dimension(377,550));
-        try {
-            File img = new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\71NAGPZug1L.jpg");
-            BufferedImage image = ImageIO.read(img);
-            Image scaled = image.getScaledInstance(377, 550, Image.SCALE_SMOOTH);
-            pictureLabel.setIcon(new ImageIcon(scaled));
-        }   catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        updateImage(examined_plant.getPlant_img().getAbsolutePath());
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
@@ -107,21 +100,22 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
             JFileChooser fileChooser = new JFileChooser();
             int response = fileChooser.showOpenDialog(null);
             System.out.println("right");
-
             if (response == JFileChooser.APPROVE_OPTION)
             {
                 File file = new File(String.valueOf(fileChooser.getSelectedFile().getAbsolutePath()));
-                updateImage(file);
+                updateImage(file.getAbsolutePath());
             }
         }
 
     }
 
-    public void updateImage(File img)
+    public void updateImage(String path)
     {
         try {
-            BufferedImage image = ImageIO.read(img);
+            System.out.println(path);
+            BufferedImage image = ImageIO.read(new File(path));
             Image scaled = image.getScaledInstance(377, 550, Image.SCALE_SMOOTH);
+            examined_plant.setPlant_img(path);
             pictureLabel.setIcon(new ImageIcon(scaled));
         }   catch (IOException e)
         {
