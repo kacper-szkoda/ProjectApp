@@ -8,9 +8,16 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
 import java.util.TimerTask;
 
-public class PlantPanel extends JPanel implements ActionListener, MouseListener {
+public class PlantPanel extends TimerPanel implements ActionListener, MouseListener {
+    private java.util.Timer timer;
+
+    public Timer getTimer() {
+        return timer;
+    }
+
     private SliderGradient sgl, sgm;
     private JButton interrupt, pump_button;
     private JLabel pictureLabel;
@@ -69,7 +76,7 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
         c.insets = new Insets(10, 40, 40, 40);
         this.add(interrupt, c);
 
-        java.util.Timer timer = new java.util.Timer();
+        timer = new java.util.Timer();
         TimerTask task =new TimerTask() {
             @Override
             public void run() {
@@ -91,7 +98,7 @@ public class PlantPanel extends JPanel implements ActionListener, MouseListener 
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }); 
+        });
     }
 
 

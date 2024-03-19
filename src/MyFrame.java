@@ -13,7 +13,7 @@ public class MyFrame extends JFrame implements ActionListener
     private MyFrame.frame_state frame_state;
     private ArrayList<Plant> curr_plants;
     private JScrollPane scrollPane;
-    private JPanel jPanel2;
+    private TimerPanel jPanel2;
     private JTextField to_seek;
     private JButton update_button, back;
     private ArrayList<PlantButton> buttons;
@@ -195,6 +195,7 @@ public class MyFrame extends JFrame implements ActionListener
         }
         if (e.getSource() == back)
         {
+            jPanel2.getTimer().cancel();
             this.remove(jPanel2);
             this.remove(scrollPane);
             this.remove(jPanel);

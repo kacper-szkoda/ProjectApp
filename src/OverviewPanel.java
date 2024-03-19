@@ -1,8 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class OverviewPanel extends JPanel{
+public class OverviewPanel extends TimerPanel{
     private ArrayList<PlantButton> plants;
 
     public OverviewPanel(ArrayList<PlantButton> plants) {
