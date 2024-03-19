@@ -153,9 +153,11 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
         try {
             System.out.println(path);
             BufferedImage image = ImageIO.read(new File(path));
-            Image scaled = image.getScaledInstance(600, 800, Image.SCALE_SMOOTH);
+            Image scaled = image.getScaledInstance(451, 600, Image.SCALE_SMOOTH);
             examined_plant.setPlant_img(path);
             pictureLabel.setIcon(new ImageIcon(scaled));
+            //pictureLabel.setPreferredSize(new Dimension(scaled.getWidth(), ));
+            //pictureLabel.setBorder(new LineBorder(Color.WHITE, 10));
         }   catch (IOException e)
         {
             e.printStackTrace();
