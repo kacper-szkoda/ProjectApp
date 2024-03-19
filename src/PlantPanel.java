@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,9 +26,14 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
     private float needed_moist;
     Plant examined_plant;
     //private File plant_img = new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\71NAGPZug1L.jpg");
-
+    private Hashtable<String, Integer> pref_to_int;
     StateStorage ss;
     public PlantPanel(Plant plant ) {
+        pref_to_int = new Hashtable<String, Integer>();
+        pref_to_int.put("Dry", 25);
+        pref_to_int.put("Slightly Dry", 50);
+        pref_to_int.put("Moist", 75);
+        pref_to_int.put("Very Moist", 100);
         this.setBackground(new Color(173, 188, 159));
         examined_plant = plant;
         GridBagLayout gbl = new GridBagLayout();
@@ -105,21 +111,21 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
     @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == pump_button) {
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 1);
+                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + pref_to_int.get(examined_plant.getPref_moist_plant()) + "/" + 1);
             }
             if (e.getSource() == interrupt) {
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + 1);
+                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + 0 + "/" + 1);
             }
         }
 
         public int getMoist()
         {
-            return SQLControl.parseJSONForMoist(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_moist_curr/" + examined_plant.getPlant_name()));
+            return SQLControl.parseJSONForMoist(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_moist_curr/" + examined_plant.getPlant_name().replace(' ', '+')));
         }
 
         public int getLight()
         {
-            return SQLControl.parseJSONForLight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_ldr_curr/" + examined_plant.getPlant_name()));
+            return SQLControl.parseJSONForLight(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/get_ldr_curr/" + examined_plant.getPlant_name().replace(' ', '+')));
         }
 
     @Override
@@ -147,7 +153,7 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
         try {
             System.out.println(path);
             BufferedImage image = ImageIO.read(new File(path));
-            Image scaled = image.getScaledInstance(377, 550, Image.SCALE_SMOOTH);
+            Image scaled = image.getScaledInstance(600, 800, Image.SCALE_SMOOTH);
             examined_plant.setPlant_img(path);
             pictureLabel.setIcon(new ImageIcon(scaled));
         }   catch (IOException e)

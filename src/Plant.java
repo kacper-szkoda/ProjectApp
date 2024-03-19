@@ -103,12 +103,28 @@ public class Plant {
         }
 
         for (int i = 0; i < fileContent.size(); i++) {
-            String[] tokens = fileContent.get(i).split(" ", 2);
+            String[] tokens = fileContent.get(i).split("\\s+");
             String tok = tokens[0];
-            if (tok.equals(plant_name)) {
-                System.out.println(fileContent.get(i));
-                return tokens[1];
+            int reg = 1;
+            String s = "";
+            boolean flag = false;
+            for (int j = 0; j < tokens.length - 1; j++)
+            {
+                if (!flag) {
+                    s += tokens[j];
+                    s += " ";
+                    reg++;
+                    if (s.trim().equals(plant_name)) {
+                        System.out.println(fileContent.get(i));
+                        flag = true;
+                        s = "";
+                    }
+                }
+                else {
+                    return fileContent.get(i).split(" ", reg)[fileContent.get(i).split(" ", reg).length -1 ];
+                }
             }
+
         }
         return "";
     }
