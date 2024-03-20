@@ -1,3 +1,5 @@
+import water_level_sprites.WateringCanSprite;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,7 +48,7 @@ public class MyFrame extends JFrame implements ActionListener
         //Note, WrapLayout is a piece of open-source code. FlowLayout would try to put all components
         //in one row, which is not suited for a scrollable panel, WrapLayout specifically addresses that issue
         //c = new GridBagConstraints();
-        //c.fill = GridBagConstraints.BOTH;
+        //c.fill = GridBagConstraints.BOTH;w
         //c.gridy = 0;
         //c.gridx = 0;
         //c.weighty = 1;
@@ -141,6 +143,8 @@ public class MyFrame extends JFrame implements ActionListener
         stringToCol.put("Slightly Moist", Color.decode("#2DB19D"));
         stringToCol.put("Moist", Color.decode("#01B2D1"));
         stringToCol.put("Low", Color.decode("#01B2D1"));
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public ArrayList<Plant> parseCurrentPlants()
@@ -221,6 +225,9 @@ public class MyFrame extends JFrame implements ActionListener
         weigh.setPreferredSize(new Dimension(150, 75));
         weigh.addActionListener(this);
         overPanel.add(weigh, ctop);
+
+        ctop.gridx = 4;
+        overPanel.add(new WateringCanSprite(), ctop);
     }
 
     public void makeOverviewBottom()
@@ -308,5 +315,18 @@ public class MyFrame extends JFrame implements ActionListener
             makeOverviewBottom();
             this.getContentPane().revalidate();
         }
+        if (e.getSource() == tare)
+        {
+
+        }
+        if (e.getSource() == weigh)
+        {
+
+        }
+        if (e.getSource() == config)
+        {
+            SelectSensors ss = new  SelectSensors(this, "Config", true, curr_plants);
+        }
+
     }
 }

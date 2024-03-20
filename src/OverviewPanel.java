@@ -12,5 +12,7 @@ public class OverviewPanel extends TimerPanel{
         {
             this.add(button);
         }
+        this.setSize(this.getPreferredSize());
+        this.revalidate();
     }
 }
