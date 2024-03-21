@@ -1,6 +1,7 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -149,6 +150,7 @@ public class SQLControl
         }
         makeGETRequest("https://studev.groept.be/api/a23ib2a01/addCurPlant/" + plant_name.replace(" ", "+") + "/" + pref_moist.replace(" ", "+") + "/" + pref_light.replace(" ", "+"));
     }
+
 //    public static float parseJSONForParameter(String jsonString, String key)
 //    {
 //        try {

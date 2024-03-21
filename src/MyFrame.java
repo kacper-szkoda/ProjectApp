@@ -40,6 +40,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
     //}
     public MyFrame()
     {
+        this.setIconImage(new ImageIcon("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\can_icon.png").getImage());
         curr_plants = parseCurrentPlants();
         //StateStorage ss = new StateStorage(curr_plants);
         //Set up frame with 2 panels, one for control, one for display
@@ -297,6 +298,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             this.remove(jPanel2);
             this.remove(scrollPane);
             makePlantPanel((PlantButton) e.getSource());
+            this.remove(jPanelAdd);
             this.getContentPane().revalidate();
             overPanel.revalidate();
             jPanel.revalidate();
@@ -316,6 +318,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             this.remove(jPanel);
             makeOverviewTop();
             makeOverviewBottom();
+            makeOverviewPanelAdd();
             this.getContentPane().revalidate();
         }
         if (e.getSource() == tare)

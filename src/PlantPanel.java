@@ -155,7 +155,27 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
             BufferedImage image = ImageIO.read(new File(path));
             Image scaled = image.getScaledInstance(451, 600, Image.SCALE_SMOOTH);
             examined_plant.setPlant_img(path);
-            pictureLabel.setIcon(new ImageIcon(scaled));
+            ImageIcon icon = new ImageIcon(scaled);
+
+
+            int borderWidth = 1;
+            int spaceAroundIcon = 0;
+            Color borderColor = new Color(18, 55, 42);
+
+            BufferedImage bi = new BufferedImage(icon.getIconWidth() + (2 * borderWidth + 2 * spaceAroundIcon),icon.getIconHeight() + (2 * borderWidth + 2 * spaceAroundIcon), BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g = bi.createGraphics();
+            g.setColor(borderColor);
+            g.drawImage(icon.getImage(), borderWidth + spaceAroundIcon, borderWidth + spaceAroundIcon, null);
+
+            BasicStroke stroke = new BasicStroke(5); //5 pixels wide (thickness of the border)
+            g.setStroke(stroke);
+
+            g.drawRect(0, 0, bi.getWidth() - 1, bi.getHeight() - 1);
+            g.dispose();
+
+            pictureLabel.setIcon(new ImageIcon(bi));
+
         }   catch (IOException e)
         {
             e.printStackTrace();
