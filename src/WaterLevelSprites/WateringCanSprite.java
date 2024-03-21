@@ -13,22 +13,17 @@ import java.io.IOException;
 
 public class WateringCanSprite extends JLabel {
 
-    public WateringCanSprite()
-    {
+    public WateringCanSprite() {
         setSprite(findPath());
         this.setBackground(new Color(173, 188, 159));
     }
 
-    public void setSprite(String path)
-    {
-        try
-        {
-            System.out.println(path);
+    public void setSprite(String path) {
+        try {
             BufferedImage image = ImageIO.read(new File(path));
             Image scaled = image.getScaledInstance(134, 134, Image.SCALE_SMOOTH);
             this.setIcon(new ImageIcon(scaled));
-        }   catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -52,8 +47,6 @@ public class WateringCanSprite extends JLabel {
             return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.375.png";
         if (frac > 0.125)
             return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.250.png";
-
         return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.125.png";
-
     }
 }

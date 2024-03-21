@@ -93,7 +93,6 @@ public class Plant {
                     s += " ";
                     reg++;
                     if (s.trim().equals(plant_name)) {
-                        System.out.println(fileContent.get(i));
                         flag = true;
                         s = "";
                     }

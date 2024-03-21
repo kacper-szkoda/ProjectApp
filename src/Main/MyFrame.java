@@ -238,7 +238,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             overPanel.remove(weigh);
             jPanel.remove(overPanel);
             this.remove(jPanel2);
-            this.remove(scrollPane);
+            //this.remove(scrollPane);
             makePlantPanel((PlantButton) e.getSource());
             this.remove(jPanelAdd);
             this.getContentPane().revalidate();
@@ -252,7 +252,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
 
             }
             this.remove(jPanel2);
-            this.remove(scrollPane);
+            //this.remove(scrollPane);
             back = null;
             this.remove(jPanel);
             makeOverviewTop();

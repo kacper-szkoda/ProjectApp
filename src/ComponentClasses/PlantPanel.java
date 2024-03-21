@@ -109,7 +109,6 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
     }
 
     private void fetchDataAndUpdateUI() {
-        System.out.println("Executed");
         SwingUtilities.invokeLater(() -> {
             try {
                 sgl.setValue(getLight());
