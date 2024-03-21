@@ -1,3 +1,5 @@
+import Control.SQLControl;
+import SupplementaryClasses.Plant;
 import water_level_sprites.WateringCanSprite;
 
 import javax.swing.*;

@@ -1,5 +1,9 @@
 package water_level_sprites;
 
+import Control.SQLControl;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -29,9 +33,11 @@ public class WateringCanSprite extends JLabel {
         }
     }
 
-    public String findPath()
-    {
-        double frac = 0.300;
+    public String findPath() {
+        JSONArray array = new JSONArray(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/getFrac"));
+        JSONObject cur = array.getJSONObject(0);
+        double frac = cur.getDouble("fraction");
+
         if (frac > 0.875)
             return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\1.000.png";
         if (frac > 0.750)

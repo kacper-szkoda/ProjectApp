@@ -1,3 +1,6 @@
+package Control;
+
+import SupplementaryClasses.Plant;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,7 +163,7 @@ public class SQLControl
 //            String p_light = curObject.getString("preffered_light");
 //            String p_moist = curObject.getString("preffered_moist");
 //            String name = curObject.getString("plant_name");
-//            plants.add(new Plant(name, p_moist, p_light));
+//            plants.add(new SupplementaryClasses.Plant(name, p_moist, p_light));
 //        }
 //    } catch (JSONException e) {
 //        e.printStackTrace();

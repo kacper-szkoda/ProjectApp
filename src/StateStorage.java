@@ -1,3 +1,6 @@
+import Control.SQLControl;
+import SupplementaryClasses.Plant;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 

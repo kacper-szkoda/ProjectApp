@@ -1,3 +1,6 @@
+import Control.SQLControl;
+import SupplementaryClasses.Plant;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

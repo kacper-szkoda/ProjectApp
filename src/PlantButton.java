@@ -1,3 +1,5 @@
+import SupplementaryClasses.Plant;
+
 import javax.swing.*;
 import java.awt.*;
 
