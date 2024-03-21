@@ -45,7 +45,11 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
         pictureLabel = new JLabel();
         pictureLabel.addMouseListener(this);
         this.setPreferredSize(new Dimension(377, 550));
-        updateImage(examined_plant.getPlant_img().getAbsolutePath());
+        try {
+            updateImage(examined_plant.getPlant_img().getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         sgl = new SliderGradient();
         sgl.setValue(getLight());
@@ -147,13 +151,16 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
             int response = fileChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                updateImage(file.getAbsolutePath());
+                try {
+                    updateImage(file.getAbsolutePath());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
-
     }
 
-    public void updateImage(String path) {
+    public void updateImage(String path) throws IOException {
         try {
             BufferedImage image = ImageIO.read(new File(path));
             Image scaled = image.getScaledInstance(451, 600, Image.SCALE_SMOOTH);
@@ -179,7 +186,28 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
             pictureLabel.setIcon(new ImageIcon(bi));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            BufferedImage image = ImageIO.read(new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png"));
+            Image scaled = image.getScaledInstance(451, 600, Image.SCALE_SMOOTH);
+            examined_plant.setPlant_img(path);
+            ImageIcon icon = new ImageIcon(scaled);
+
+            int borderWidth = 1;
+            int spaceAroundIcon = 0;
+            Color borderColor = new Color(18, 55, 42);
+
+            BufferedImage bi = new BufferedImage(icon.getIconWidth() + (2 * borderWidth + 2 * spaceAroundIcon), icon.getIconHeight() + (2 * borderWidth + 2 * spaceAroundIcon), BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g = bi.createGraphics();
+            g.setColor(borderColor);
+            g.drawImage(icon.getImage(), borderWidth + spaceAroundIcon, borderWidth + spaceAroundIcon, null);
+
+            BasicStroke stroke = new BasicStroke(5); //5 pixels wide (thickness of the border)
+            g.setStroke(stroke);
+
+            g.drawRect(0, 0, bi.getWidth() - 1, bi.getHeight() - 1);
+            g.dispose();
+
+            pictureLabel.setIcon(new ImageIcon(bi));
         }
     }
 
