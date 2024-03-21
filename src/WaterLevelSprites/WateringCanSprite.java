@@ -1,4 +1,4 @@
-package water_level_sprites;
+package WaterLevelSprites;
 
 import Control.SQLControl;
 import org.json.JSONArray;
@@ -39,21 +39,21 @@ public class WateringCanSprite extends JLabel {
         double frac = cur.getDouble("fraction");
 
         if (frac > 0.875)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\1.000.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\1.000.png";
         if (frac > 0.750)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.750.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.750.png";
         if (frac > 0.625)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.750.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.750.png";
         if (frac > 0.500)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.625.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.625.png";
         if (frac > 0.375)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.500.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.500.png";
         if (frac > 0.250)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.375.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.375.png";
         if (frac > 0.125)
-            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.250.png";
+            return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.250.png";
 
-        return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\water_level_sprites\\0.125.png";
+        return "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\WaterLevelSprites\\0.125.png";
 
     }
 }

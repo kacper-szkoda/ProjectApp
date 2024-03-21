@@ -1,10 +1,12 @@
+package ComponentClasses;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class OutlinePanel extends JLabel {
-    private String text;
-    private Color textColor;
-    private Color outlineColor;
+    private final String text;
+    private final Color textColor;
+    private final Color outlineColor;
 
     public OutlinePanel(String text, Color textColor, Color outlineColor) {
         this.text = text;
@@ -50,15 +52,4 @@ public class OutlinePanel extends JLabel {
     public Dimension getPreferredSize() {
         return new Dimension(200, 100); // Adjust size as needed
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Outlined Text Example");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            OutlinePanel textComponent = new OutlinePanel("Outlined Text", Color.WHITE, Color.BLACK);
-            frame.add(textComponent);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }}
+}

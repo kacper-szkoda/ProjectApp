@@ -1,3 +1,5 @@
+package SupplementaryClasses;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,7 @@ public class WrapLayout extends FlowLayout
 	private Dimension preferredLayoutSize;
 
 	/**
-	* Constructs a new <code>WrapLayout</code> with a left
+	* Constructs a new <code>SupplementaryClasses.WrapLayout</code> with a left
 	* alignment and a default 5-unit horizontal and vertical gap.
 	*/
 	public WrapLayout()
@@ -21,8 +23,8 @@ public class WrapLayout extends FlowLayout
 	* Constructs a new <code>FlowLayout</code> with the specified
 	* alignment and a default 5-unit horizontal and vertical gap.
 	* The value of the alignment argument must be one of
-	* <code>WrapLayout</code>, <code>WrapLayout</code>,
-	* or <code>WrapLayout</code>.
+	* <code>SupplementaryClasses.WrapLayout</code>, <code>SupplementaryClasses.WrapLayout</code>,
+	* or <code>SupplementaryClasses.WrapLayout</code>.
 	* @param align the alignment value
 	*/
 	public WrapLayout(int align)
@@ -35,8 +37,8 @@ public class WrapLayout extends FlowLayout
 	* and the indicated horizontal and vertical gaps.
 	* <p>
 	* The value of the alignment argument must be one of
-	* <code>WrapLayout</code>, <code>WrapLayout</code>,
-	* or <code>WrapLayout</code>.
+	* <code>SupplementaryClasses.WrapLayout</code>, <code>SupplementaryClasses.WrapLayout</code>,
+	* or <code>SupplementaryClasses.WrapLayout</code>.
 	* @param align the alignment value
 	* @param hgap the horizontal gap between components
 	* @param vgap the vertical gap between components

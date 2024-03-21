@@ -1,3 +1,5 @@
+package SupplementaryClasses;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
