@@ -1,10 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class SelectSensors extends JDialog {
-    public SelectSensors(Frame owner, String title, boolean modal, ArrayList<Plant> curr) {
+public class SelectSensors extends JDialog implements ActionListener{
+
+    private JButton add;
+    JTextField addPlant;
+    private MyFrame owner;
+    public JButton getAdd() {
+        return add;
+    }
+
+    public SelectSensors(MyFrame owner, String title, boolean modal, ArrayList<Plant> curr) {
         super(owner, title, modal);
+        this.owner = owner;
         GridBagLayout gbl = new GridBagLayout();
         this.setLayout(gbl);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -37,6 +48,7 @@ public class SelectSensors extends JDialog {
         comboBoxl.setFont(new Font("Helvetica",Font.BOLD, 25));
         comboBoxl.setBackground(Color.decode("#829F77"));
         comboBoxl.setForeground(Color.white);
+        comboBoxl.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(comboBoxl, gbc);
 
         gbc.gridy = 1;
@@ -49,12 +61,18 @@ public class SelectSensors extends JDialog {
         comboBoxm.setFont(new Font("Helvetica",Font.BOLD, 25));
         comboBoxm.setBackground(Color.decode("#829F77"));
         comboBoxm.setForeground(Color.white);
+        comboBoxm.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
         this.add(comboBoxm, gbc);
 
         this.getContentPane().setBackground(new Color(156, 169, 143));
+        this.setPreferredSize(new Dimension(800, 800));
+        this.pack();
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(400, 400));
         this.revalidate();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

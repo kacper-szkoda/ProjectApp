@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class MyFrame extends JFrame implements ActionListener
+public class MyFrame extends JFrame implements ActionListener, ComponentListener
 {
     private GridBagLayout gbl;
     private GridBagConstraints c;
@@ -27,6 +29,10 @@ public class MyFrame extends JFrame implements ActionListener
     private JPanel overPanel;
     private GridBagLayout gbltop;
     private GridBagConstraints ctop;
+    private SelectSensors ss;
+    private JPanel jPanelAdd;
+    private JButton add;
+    private JTextField addPlant;
 
     //enum frame_state {
         //PLANT,
@@ -34,7 +40,6 @@ public class MyFrame extends JFrame implements ActionListener
     //}
     public MyFrame()
     {
-        //this.frame_state = last;
         curr_plants = parseCurrentPlants();
         //StateStorage ss = new StateStorage(curr_plants);
         //Set up frame with 2 panels, one for control, one for display
@@ -43,36 +48,12 @@ public class MyFrame extends JFrame implements ActionListener
         this.setTitle("Sensor Overview");
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
-        //this.setResizable(true);
         this.getContentPane().setBackground(new Color(173, 188, 159));
-        //Note, WrapLayout is a piece of open-source code. FlowLayout would try to put all components
-        //in one row, which is not suited for a scrollable panel, WrapLayout specifically addresses that issue
-        //c = new GridBagConstraints();
-        //c.fill = GridBagConstraints.BOTH;w
-        //c.gridy = 0;
-        //c.gridx = 0;
-        //c.weighty = 1;
-        //c.weightx = 1;
-        //gbl = new GridBagLayout();
-        //jPanel = new JPanel(new BorderLayout());
-        //jPanel.setBackground(new Color(156, 169, 143));
-        //jPanel.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80), new Color(18, 55, 42)));
-        //this.add(jPanel, BorderLayout.NORTH);
         jPanel2 = new OverviewPanel(createButtons());
         this.add (jPanel2, BorderLayout.CENTER);
 
         makeOverviewTop();
-
-        //Set up button for updating
-//        update_button = new JButton();
-//        update_button.addActionListener(this);
-//        update_button.setFocusable(false);
-//        update_button.setText("Update");
-//        update_button.setFont(new Font("Helvetica", Font.PLAIN, 30));
-//        update_button.setForeground(new Color(18, 55, 42));
-//        update_button.setBackground(new Color(140, 152, 129));
-//        update_button.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
-//        update_button.setPreferredSize(new Dimension(200, 75));
+        makeOverviewPanelAdd();
 
         //Set up a text field for user input of the sought after measurement unit
 //        to_seek = new JTextField();
@@ -80,46 +61,10 @@ public class MyFrame extends JFrame implements ActionListener
 //        to_seek.setFont(new Font("Helvetica", Font.PLAIN, 30));
 //        to_seek.setHorizontalAlignment(JTextField.CENTER);
 
-//        back = new JButton("Back");
-//        back.setFont(new Font("Helvetica",Font.BOLD, 40));
-//        back.setForeground(new Color(255, 255, 255));
-//        back.setBackground(Color.decode("#829F77"));
-//        back.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
-//        back.setPreferredSize(new Dimension(200, 75));
-//        back.addActionListener(this);
-//        jPanel.add(back, BorderLayout.WEST);
-//
-//        GridBagLayout gbltop = new GridBagLayout();
-//        GridBagConstraints ctop = new GridBagConstraints();
-//        jPanel.setLayout(gbltop);
-//
-//        ctop.gridy = 0;
-//        ctop.gridx =1;
-//        ctop.weightx = 1;
-//        ctop.weighty =1;
-//        ctop.fill = GridBagConstraints.VERTICAL;
-//        tare = new JButton("Tare");
-//        tare.setFont(new Font("Helvetica",Font.BOLD, 40));
-//        tare.setForeground(new Color(255, 255, 255));
-//        tare.setBackground(Color.decode("#829F77"));
-//        tare.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
-//        tare.setPreferredSize(new Dimension(200, 75));
-//        tare.addActionListener(this);
-//        jPanel.add(tare, ctop);
-//
-//        ctop.gridx = 2;
-//        weigh = new JButton("Weigh");
-//        weigh.setFont(new Font("Helvetica",Font.BOLD, 40));
-//        weigh.setForeground(new Color(255, 255, 255));
-//        weigh.setBackground(Color.decode("#829F77"));
-//        weigh.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
-//        weigh.setPreferredSize(new Dimension(200, 75));
-//        weigh.addActionListener(this);
-//        jPanel.add(weigh, ctop);
 
         //Make the panel scrollable, so that the app does not break with
         //larger number of sensors stored in the database
-        // (can be tested with hPa or by adding more to the db)
+        //(can be tested with hPa or by adding more to the db)
         scrollPane = new JScrollPane(jPanel2);
         scrollPane.setPreferredSize(new Dimension(jPanel2.getSize()));
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -150,6 +95,10 @@ public class MyFrame extends JFrame implements ActionListener
     public ArrayList<Plant> parseCurrentPlants()
     {
         return SQLControl.pJSONForCurrent(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/getCurrent"));
+    }
+
+    public void setCurr_plants(ArrayList<Plant> curr_plants) {
+        this.curr_plants = curr_plants;
     }
 
     public ArrayList<PlantButton> createButtons()
@@ -232,8 +181,53 @@ public class MyFrame extends JFrame implements ActionListener
 
     public void makeOverviewBottom()
     {
+        this.remove(jPanel2);
         jPanel2 = new OverviewPanel(createButtons());
         this.add(jPanel2, BorderLayout.CENTER);
+        jPanel2.revalidate();
+        this.getContentPane().revalidate();
+    }
+
+    public void makeOverviewPanelAdd()
+    {
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagLayout gbl = new GridBagLayout();
+
+        jPanelAdd = new JPanel();
+        jPanelAdd.setLayout(gbl);
+        jPanelAdd.setBackground(new Color(156, 169, 143));
+        jPanelAdd.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+
+
+        addPlant = new JTextField();
+        addPlant.setPreferredSize(new Dimension(350, 40));
+        addPlant.setFont(new Font("Helvetica",Font.BOLD, 25));
+        addPlant.setHorizontalAlignment(JTextField.CENTER);
+        addPlant.setBackground(Color.decode("#829F77"));
+        addPlant.setForeground(Color.white);
+        addPlant.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+
+        add = new JButton("Add");
+        add.addActionListener(this);
+        add.setFont(new Font("Helvetica",Font.BOLD, 40));
+        add.setForeground(new Color(255, 255, 255));
+        add.setBackground(Color.decode("#829F77"));
+        add.setBorder(BorderFactory.createEtchedBorder(new Color(67, 104, 80),new Color(18, 55, 42)));
+        add.setPreferredSize(new Dimension(150, 75));
+
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weighty = 1;
+        gbc.weightx = 1;
+        jPanelAdd.add(addPlant, gbc);
+
+        gbc.gridx = 1;
+        jPanelAdd.add(add, gbc);
+
+        this.add(jPanelAdd, BorderLayout.SOUTH);
+        this.revalidate();
     }
 
     public void makePlantPanel(PlantButton temp)
@@ -286,6 +280,10 @@ public class MyFrame extends JFrame implements ActionListener
         overPanel.revalidate();
     }
 
+    public TimerPanel getjPanel2() {
+        return jPanel2;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -302,11 +300,16 @@ public class MyFrame extends JFrame implements ActionListener
             this.getContentPane().revalidate();
             overPanel.revalidate();
             jPanel.revalidate();
-
         }
         if (e.getSource() == back)
         {
-            jPanel2.getTimer().cancel();
+            try {
+                jPanel2.getTimer().cancel();
+            }
+            catch (NullPointerException ex)
+            {
+
+            }
             this.remove(jPanel2);
             this.remove(scrollPane);
             back = null;
@@ -317,16 +320,58 @@ public class MyFrame extends JFrame implements ActionListener
         }
         if (e.getSource() == tare)
         {
-
+            SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 0 + "/" + "tare/" +3);
         }
         if (e.getSource() == weigh)
         {
-
+            SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 0 + "/"+ "weigh/" + 2);
         }
         if (e.getSource() == config)
         {
-            SelectSensors ss = new  SelectSensors(this, "Config", true, curr_plants);
+            ss = new  SelectSensors(this,  "Config", true, curr_plants);
         }
+        if (e.getSource() == add)
+        {
+            int i = curr_plants.size();
+            String txt = addPlant.getText();
+            SQLControl.addNewCurrPlant(SQLControl.makeGETRequest("https://studev.groept.be/api/a23ib2a01/parseForPlant/" + txt.replace(" ", "+")));
+            this.setCurr_plants(this.parseCurrentPlants());
+            this.makeOverviewBottom();
+            this.remove(jPanel2);
+            this.remove(scrollPane);
+            back = null;
+            this.remove(jPanel);
+            makeOverviewTop();
+            makeOverviewBottom();
+            this.getContentPane().revalidate();
+            addPlant.setText("");
+            if (curr_plants.size() > i)
+            {
+                curr_plants.get(curr_plants.size() -1).addNewPlantDefaultImg();
+            }
+        }
+    }
 
+    @Override
+    public void componentResized(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+        if (e.getSource() == ss)
+        {
+
+        }
     }
 }

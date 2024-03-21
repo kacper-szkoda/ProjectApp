@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,20 +11,6 @@ public class Plant {
     private String plant_name;
     private File plant_img;
     private String file_path;
-    enum pref_moist {
-        very_dry,
-        slightly_dry,
-        slightly_moist,
-        moist,
-    }
-
-    enum pref_light
-    {
-        direct_sun,
-        high,
-        medium,
-        low,
-    }
 
     public Plant(String plant_name, String pref_moist, String pref_light) {
         this.plant_name = plant_name;
@@ -48,16 +33,7 @@ public class Plant {
     {
         return pref_moist_plant;
     }
-//    public void set_pref(String pref_moist, String pref_light)
-//    {
-//        for (Plant.pref_moist prefMoist : Plant.pref_moist.values()  )
-//        {
-//            if (pref_moist.equals(prefMoist.name()))
-//            {
-//                pref_moist_plant = Plant.pref_moist.prefMoist;
-//            }
-//        }
-//    }
+
     public void plantSetImg(File img)
     {
         plant_img = img;
@@ -127,5 +103,18 @@ public class Plant {
 
         }
         return "";
+    }
+
+    public void addNewPlantDefaultImg()
+    {
+        Writer output;
+        try {
+            output = new BufferedWriter(new FileWriter("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\dane.txt", true));
+            output.append(plant_name + " " + "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png");
+            output.close();
+            this.setPlant_img("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

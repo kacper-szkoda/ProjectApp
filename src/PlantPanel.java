@@ -111,10 +111,10 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
     @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == pump_button) {
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + pref_to_int.get(examined_plant.getPref_moist_plant()) + "/" + 1);
+                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + pref_to_int.get(examined_plant.getPref_moist_plant()) +"/"+examined_plant.getPlant_name().replace(' ', '+') +"/" + 1);
             }
             if (e.getSource() == interrupt) {
-                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + 0 + "/" + 1);
+                SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 0 + "/" + pref_to_int.get(examined_plant.getPref_moist_plant()) +"/"+examined_plant.getPlant_name().replace(' ', '+') +"/" + 1);
             }
         }
 

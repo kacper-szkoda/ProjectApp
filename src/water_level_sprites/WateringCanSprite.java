@@ -9,14 +9,16 @@ import java.io.IOException;
 
 public class WateringCanSprite extends JLabel {
 
-    public WateringCanSprite() {
+    public WateringCanSprite()
+    {
         setSprite(findPath());
         this.setBackground(new Color(173, 188, 159));
     }
 
     public void setSprite(String path)
     {
-        try {
+        try
+        {
             System.out.println(path);
             BufferedImage image = ImageIO.read(new File(path));
             Image scaled = image.getScaledInstance(134, 134, Image.SCALE_SMOOTH);

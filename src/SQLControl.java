@@ -33,7 +33,6 @@ public class SQLControl
         {
             e.printStackTrace();
         }
-
     }
 
     public static String makeGETRequest(String urlName) {
@@ -130,6 +129,25 @@ public class SQLControl
         }
         System.out.println(weight);
         return weight;
+    }
+
+    public static void addNewCurrPlant(String jsonString)
+    {
+        String plant_name = "";
+        String pref_moist = "";
+        String pref_light = "";
+        try {
+            JSONArray array = new JSONArray(jsonString);
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject curObject = array.getJSONObject(i);
+                plant_name = curObject.getString("plant_name");
+                pref_moist = curObject.getString("preffered_moist");
+                pref_light = curObject.getString("preffered_light");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        makeGETRequest("https://studev.groept.be/api/a23ib2a01/addCurPlant/" + plant_name.replace(" ", "+") + "/" + pref_moist.replace(" ", "+") + "/" + pref_light.replace(" ", "+"));
     }
 //    public static float parseJSONForParameter(String jsonString, String key)
 //    {
