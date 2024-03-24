@@ -186,7 +186,7 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
             pictureLabel.setIcon(new ImageIcon(bi));
 
         } catch (IOException e) {
-            BufferedImage image = ImageIO.read(new File("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png"));
+            BufferedImage image = ImageIO.read(new File("src/generic_plant.png"));
             Image scaled = image.getScaledInstance(451, 600, Image.SCALE_SMOOTH);
             examined_plant.setPlant_img(path);
             ImageIcon icon = new ImageIcon(scaled);

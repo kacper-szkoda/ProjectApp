@@ -48,7 +48,7 @@ public class Plant {
     public void setPlant_img(String newpath) {
         List<String> fileContent = null;
         try {
-            fileContent = new ArrayList<>(Files.readAllLines(Path.of("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\data.txt"), StandardCharsets.UTF_8));
+            fileContent = new ArrayList<>(Files.readAllLines(Path.of("src/data.txt"), StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +63,7 @@ public class Plant {
             }
         }
         try {
-            Files.write(Path.of("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\data.txt"), fileContent, StandardCharsets.UTF_8);
+            Files.write(Path.of("src/data.txt"), fileContent, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,7 +75,7 @@ public class Plant {
     public String initializePlant_img()  {
         List<String> fileContent = null;
         try {
-            fileContent = new ArrayList<>(Files.readAllLines(Path.of("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\data.txt"), StandardCharsets.UTF_8));
+            fileContent = new ArrayList<>(Files.readAllLines(Path.of("src/data.txt"), StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -110,10 +110,10 @@ public class Plant {
     {
         Writer output;
         try {
-            output = new BufferedWriter(new FileWriter("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\data.txt", true));
-            output.append(plant_name + " " + "C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png");
+            output = new BufferedWriter(new FileWriter("src/data.txt", true));
+            output.append(plant_name + " " + "src/generic_plant.png");
             output.close();
-            this.setPlant_img("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png");
+            this.setPlant_img("src/generic_plant.png");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

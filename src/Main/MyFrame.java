@@ -31,7 +31,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
     private JTextField addPlant;
 
     public MyFrame() {
-        this.setIconImage(new ImageIcon("C:\\Users\\Kacper Szkoda\\IdeaProjects\\ProjectApp\\src\\generic_plant.png").getImage());
+        this.setIconImage(new ImageIcon("src/generic_plant.png").getImage());
         curr_plants = parseCurrentPlants();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1080, 1080);
