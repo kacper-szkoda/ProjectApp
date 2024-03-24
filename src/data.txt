@@ -1,3 +1,6 @@
 Peace Lily C:\Users\Kacper Szkoda\OneDrive - KU Leuven\Desktop\PlantPics\WhatsApp Image 2024-03-19 at 10.31.26_a0a302b8.jpg
-Philodendron C:\Users\Kacper Szkoda\OneDrive - KU Leuven\Desktop\PlantPics\Phil1.jpg
+Philodendron C:\Users\Kacper Szkoda\OneDrive - KU Leuven\Desktop\PlantPics\Phil2.jpg
 Spider Plant C:\Users\Kacper Szkoda\IdeaProjects\ProjectApp\src\generic_plant.png
+Aloe Vera C:\Users\Kacper Szkoda\OneDrive - KU Leuven\Desktop\PlantPics\aloe-vera-plant-outside-jpg-1522875135.jpg
+Pothos src/generic_plant.png
+Monstera src/generic_plant.png

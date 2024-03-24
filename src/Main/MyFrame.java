@@ -282,8 +282,12 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             makeOverviewBottom();
             this.getContentPane().revalidate();
             addPlant.setText("");
-            if (curr_plants.size() > i) {
-                curr_plants.get(curr_plants.size() - 1).addNewPlantDefaultImg();
+
+            for (Plant plant : curr_plants)
+            {
+                if (plant.getPlant_name().equals(txt)){
+                    plant.addNewPlantDefaultImg();
+                }
             }
         }
     }

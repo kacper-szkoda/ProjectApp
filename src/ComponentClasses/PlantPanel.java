@@ -51,12 +51,24 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
             throw new RuntimeException(e);
         }
 
-        sgl = new SliderGradient();
+        JLabel light = new JLabel();
+        light.setBackground(new Color(173, 188, 159));
+        light.setForeground(Color.white);
+        light.setText("Light");
+        light.setFont(new Font("Helvetica", Font.BOLD, 40));
+
+        JLabel moisture = new JLabel();
+        moisture.setBackground(new Color(173, 188, 159));
+        moisture.setForeground(Color.white);
+        moisture.setText("Moisture");
+        light.setFont(new Font("Helvetica", Font.BOLD, 40));
+
+        sgl = new SliderGradient("Light");
         sgl.setValue(getLight());
         sgl.setBackground(new Color(173, 188, 159));
         sgl.setEnabled(false);
 
-        sgm = new SliderGradient();
+        sgm = new SliderGradient("Moisture");
         sgm.setValue(getMoist());
         sgm.setEnabled(false);
         sgm.setBackground(new Color(173, 188, 159));
@@ -105,7 +117,7 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
                 fetchDataAndUpdateUI();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 2000);
+        timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
     public Timer getTimer() {

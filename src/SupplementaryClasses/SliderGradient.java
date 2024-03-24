@@ -42,7 +42,7 @@ public class SliderGradient extends JSlider {
     private Color ticksColor = new Color(0, 0, 0);
     private int trackSize = 50;
 
-    public SliderGradient() {
-        setUI(new SliderGradientUI(this));
+    public SliderGradient(String title) {
+        setUI(new SliderGradientUI(this, title ));
     }
 }

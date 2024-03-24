@@ -10,10 +10,12 @@ import java.awt.geom.RoundRectangle2D;
 public class SliderGradientUI extends BasicSliderUI {
 
     private SliderGradient sliderGradient;
+    private String title;
 
-    public SliderGradientUI(SliderGradient sliderGradient) {
+    public SliderGradientUI(SliderGradient sliderGradient, String title) {
         super(sliderGradient);
         this.sliderGradient = sliderGradient;
+        this.title = title;
     }
 
     @Override
@@ -47,6 +49,9 @@ public class SliderGradientUI extends BasicSliderUI {
             int x = 0;
             int y = (trackRect.height - size) / 2;
             g2.fill(new RoundRectangle2D.Double(trackRect.x + x, trackRect.y + y, trackRect.width, size, size, size));
+            g2.setColor(Color.white);
+            g2.setFont(new Font("Helvetica", Font.BOLD, 25));
+            g2.drawString(title, 0 , y + size + 5);
         } else {
             int x = (trackRect.width - size) / 2;
             int y = 0;
