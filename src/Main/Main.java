@@ -1,9 +1,16 @@
 package Main;
 
+import javax.swing.*;
+
 public class Main
 {
     public static void main(String[] args)
     {
-      MyFrame test = new MyFrame();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MyFrame test = new MyFrame();
+            }
+        });
     }
 }

@@ -261,7 +261,7 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             this.getContentPane().revalidate();
         }
         if (e.getSource() == tare) {
-            SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 0 + "/" + "tare/" + 3);
+             SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 0 + "/" + "tare/" + 3);
         }
         if (e.getSource() == weigh) {
             SQLControl.update("https://studev.groept.be/api/a23ib2a01/toggle/" + 1 + "/" + 0 + "/" + "weigh/" + 2);
@@ -276,7 +276,6 @@ public class MyFrame extends JFrame implements ActionListener, ComponentListener
             this.setCurr_plants(this.parseCurrentPlants());
             this.makeOverviewBottom();
             this.remove(jPanel2);
-            this.remove(scrollPane);
             back = null;
             this.remove(jPanel);
             makeOverviewTop();

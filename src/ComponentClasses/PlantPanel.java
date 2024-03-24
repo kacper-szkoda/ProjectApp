@@ -105,7 +105,7 @@ public class PlantPanel extends TimerPanel implements ActionListener, MouseListe
                 fetchDataAndUpdateUI();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 100);
+        timer.scheduleAtFixedRate(task, 0, 2000);
     }
 
     public Timer getTimer() {
